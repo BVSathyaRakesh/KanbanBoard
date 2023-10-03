@@ -1,0 +1,166 @@
+
+/* Presets */
+
+html,body{
+    margin: 0px;
+    padding: 0px;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 20px;
+}
+
+
+
+/* tool box css */
+
+.toolbox-cont{
+   height: 5rem;
+   background-color: black;
+   display: flex;
+   /* children are vertically aligned */
+   align-items: center;
+   /* just gives space between flex elements */
+   gap: 3rem;;
+}
+
+.toolbox-priority-cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+    width: 15rem;
+    height: 3rem;
+    background-color: white;
+    margin-left: 7rem;
+}
+
+
+
+  .color{
+     height: 60%;
+     width: 20%;
+  }
+
+  .red{
+     background-color: red;
+  }
+
+  .blue{
+    background-color: blue;
+  }
+
+ .green{
+    background-color: green;
+ }
+
+  .purple{
+    background-color: purple;
+  }
+
+  .action-btn-cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 3rem;
+    width: 10rem;
+    background-color: white;
+  }
+
+   .add-btn,.remove-btn{
+     width: 50%;
+     height: 100%;
+     /* border: 1px solid gray; */
+     display: flex;
+     align-items: center;
+     justify-content: center;
+   }
+
+   .large-icons{
+     font-size: 1.5rem;
+   }
+
+   /* main container css */
+
+   .main-cont{
+      margin-top: 3rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      /* flex-wrap: if width is not enough for some elements then they 
+       will be moved to the subsequent rows
+       
+       when some elements cannot fit inside parent element width,
+       those elements are moved to nest row
+       
+       */
+      flex-wrap: wrap;
+      row-gap: 2rem;
+   }
+
+   .ticket-cont{
+     height: 5rem;
+     width: 10rem;
+     background-color: aliceblue;
+     border: 1px solid gray;
+   }
+
+   /* modal-task-cont css */
+
+    .modal-cont{
+        height: 25rem;
+        width: 35rem;
+        background-color: lightcoral;
+        position: fixed;
+
+         /* 25% of visible width of browser window */
+        left: 25vw;
+        /* 25% of visible height of browser window */
+        top: 25vh;
+        display: flex;
+        display: none;
+    }
+
+    .textarea-cont{
+        height: 100%;
+        width: 80%;
+    }
+
+    .priority-color-cont{
+        height: 100%;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .color_modal{
+        height: 10%;
+        width: 70%;
+    }
+
+
+    .selected{
+        border: 5px solid yellow;
+    }
+
+
+
+/* 
+
+ rem is relative 
+   1rem: font size of html
+   use case: u have a relative unit whose 
+   scale can be controlled from a single point
+
+   Percentages: (value/total) * 100
+   100 acres of land = 30% of land-> 30 acres of land
+
+*/

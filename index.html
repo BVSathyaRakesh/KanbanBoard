@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Kanban Board</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/Projects/KanbanBoard/styles.css">
+
+</head>
+<body>
+
+     <header class="toolbox-cont">
+        <div class="toolbox-priority-cont">
+            <div class="color red"></div>
+            <div class="color blue"></div>
+            <div class="color green"></div>
+            <div class="color purple"></div>
+        </div>
+        <div class="action-btn-cont">
+            <div class="add-btn">
+                <i class="fa-solid fa-plus large-icons"></i>
+            </div>
+            <div class="remove-btn">
+                <i class="fa-solid fa-trash large-icons"></i>
+            </div>
+        </div>
+     </header>
+     <main class="main-cont">
+        <div class="ticket-cont">
+            <div class="ticket-color green"></div>
+            <div class="ticket-id"></div>
+            <div class="ticket-area"></div>
+        </div>
+        <div class="ticket-cont">
+            <div class="ticket-color green"></div>
+            <div class="ticket-id"></div>
+            <div class="ticket-area"></div>
+        </div>
+     </main>
+
+     <div class="modal-cont">
+         <textarea  class="textarea-cont" placeholder="Enter your Text"></textarea>
+         <div class="priority-color-cont">
+            <div class="color_modal red selected" currColor="red"></div>
+            <div class="color_modal blue" currColor="blue"></div>
+            <div class="color_modal green" currColor="green"></div>
+            <div class="color_modal purple" currColor="purple"></div>
+         </div>
+     </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
