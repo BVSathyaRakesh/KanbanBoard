@@ -151,6 +151,11 @@ html{
         border: 5px solid yellow;
     }
 
+    .ticket-color{
+      height: 10%;
+      background-color: black;
+    }
+
 
 
 /* 
