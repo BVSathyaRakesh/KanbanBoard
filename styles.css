@@ -105,13 +105,7 @@ html{
    }
 
 
-    /* ticket-container */
-   .ticket-cont{
-     height: 5rem;
-     width: 10rem;
-     background-color: aliceblue;
-     border: 1px solid gray;
-   }
+    
 
    /* modal-task-cont css */
     .modal-cont{
@@ -127,19 +121,45 @@ html{
         display: none;
     }
 
+    .color_modal{
+       height: 10%;
+       width: 70%;
+     }
 
-    .ticket-color{
-      height: 10%;
-      background-color: black;
+    .selected{
+       border: 5px solid yellow;
     }
 
-    .ticket{
-      height:  5%;
-      font-weight: 600;
+
+    /* ticket-container */
+   .ticket-cont{
+      height: 5rem;
+      width: 10rem;
+      background-color: aliceblue;
+      border: 1px solid gray;
+      position: relative;
+     }
+
+  
+   .ticket-color{
+        height: 10%;
+   }
+
+    .ticket-id{
+      margin-top: 5px;
+       height:  10%;
+       font-weight: 600;
+       padding-left: 4px;
+       margin-bottom: 10px;
+       font-size: 0.8rem;
     }
 
     .ticket-area{
-      height: 85%;
+      height: 65%;
+      padding-left: 4px;
+      padding-right: 4px;
+      overflow: scroll;
+      font-size:0.75rem;
     }
 
 
@@ -155,17 +175,15 @@ html{
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-    }
+     }
 
-    .color_modal{
-        height: 10%;
-        width: 70%;
-    }
+     .lock-icon{
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+     }
 
-
-    .selected{
-        border: 5px solid yellow;
-    }
+    
 
    
 
