@@ -5,7 +5,11 @@ const addBtnContainer = document.querySelector('.add-btn');
 const colorModalArr = document.querySelectorAll('.color_modal');
 const textAreaCont = document.querySelector('.textarea-cont');
 const mainCont = document.querySelector('main');
+
+//Variable
 const uid = new ShortUniqueId({ length: 5 });
+
+
 //add event listener to add-btn container
 addBtnContainer.addEventListener('click',function(){
   modalContainer.style.display = 'flex';
@@ -42,6 +46,7 @@ textAreaCont.addEventListener('keypress',function (e){
         //current Color
         const currentColor = modalContainer.querySelector('.selected');
         const taskColor = currentColor.getAttribute('currColor');
+      
 
         //reset your model to default
         textAreaCont.value = "";
@@ -67,12 +72,13 @@ textAreaCont.addEventListener('keypress',function (e){
     mainCont.appendChild(ticketContainer);
 
     const lockButton = ticketContainer.querySelector('.lock-icon');
+    const textArea =  ticketContainer.querySelector('.ticket-area');
 
-     handleLockBtn(lockButton);
+     handleLockBtn(lockButton,textArea);
 
  }
 
- function handleLockBtn(lockButton){
+ function handleLockBtn(lockButton,textArea){
 
     lockButton.addEventListener('click',function(){
         const isLocked =  lockButton.classList.contains('fa-lock');
@@ -80,9 +86,11 @@ textAreaCont.addEventListener('keypress',function (e){
         if(isLocked == true){
             lockButton.classList.remove('fa-lock');
             lockButton.classList.add('fa-lock-open');
+            textArea.contentEditable = true;
         }else{
             lockButton.classList.add('fa-lock');
             lockButton.classList.remove('fa-lock-open');
+            textArea.contentEditable = false;
         }
     })
 
