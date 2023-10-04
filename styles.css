@@ -1,6 +1,15 @@
 
 /* Presets */
 
+:root{
+  --red : #ff6b6b;
+  --blue: #54a0ff;
+  --green: #1dd1a1;
+  --purple:#5f27cd;
+  --modalbg:#222f3e;
+  --white: white;
+}
+
 html,body{
     margin: 0px;
     padding: 0px;
@@ -20,7 +29,7 @@ html{
 
 .toolbox-cont{
    height: 5rem;
-   background-color: black;
+   background-color: var(--modalbg);
    display: flex;
    /* children are vertically aligned */
    align-items: center;
@@ -47,19 +56,19 @@ html{
   }
 
   .red{
-     background-color: red;
+     background-color: var(--red);
   }
 
   .blue{
-    background-color: blue;
+    background-color: var(--blue);
   }
 
  .green{
-    background-color: green;
+    background-color: var(--green);
  }
 
   .purple{
-    background-color: purple;
+    background-color: var(--purple);
   }
 
   .action-btn-cont{
@@ -111,7 +120,7 @@ html{
     .modal-cont{
         height: 25rem;
         width: 35rem;
-        background-color: lightcoral;
+        background-color: var(--modalbg);
         position: fixed;
          /* 25% of visible width of browser window */
         left: 25vw;
@@ -127,7 +136,7 @@ html{
      }
 
     .selected{
-       border: 5px solid yellow;
+       border: 5px solid var(--white);
     }
 
 
@@ -166,6 +175,10 @@ html{
     .textarea-cont{
         height: 100%;
         width: 80%;
+        font-size:1.5rem;
+    font-family:sans-serif ;
+    padding:1rem;
+    resize: none;
     }
 
     .priority-color-cont{
