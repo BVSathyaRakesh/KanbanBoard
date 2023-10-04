@@ -104,6 +104,8 @@ html{
       row-gap: 2rem;
    }
 
+
+    /* ticket-container */
    .ticket-cont{
      height: 5rem;
      width: 10rem;
@@ -112,13 +114,11 @@ html{
    }
 
    /* modal-task-cont css */
-
     .modal-cont{
         height: 25rem;
         width: 35rem;
         background-color: lightcoral;
         position: fixed;
-
          /* 25% of visible width of browser window */
         left: 25vw;
         /* 25% of visible height of browser window */
@@ -126,6 +126,22 @@ html{
         display: flex;
         display: none;
     }
+
+
+    .ticket-color{
+      height: 10%;
+      background-color: black;
+    }
+
+    .ticket{
+      height:  5%;
+      font-weight: 600;
+    }
+
+    .ticket-area{
+      height: 85%;
+    }
+
 
     .textarea-cont{
         height: 100%;
@@ -151,10 +167,7 @@ html{
         border: 5px solid yellow;
     }
 
-    .ticket-color{
-      height: 10%;
-      background-color: black;
-    }
+   
 
 
 

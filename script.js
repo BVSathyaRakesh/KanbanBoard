@@ -44,8 +44,6 @@ textAreaCont.addEventListener('keypress',function (e){
         //reset your model to default
         textAreaCont.value = "";
     }
-
-
     
 })
 
