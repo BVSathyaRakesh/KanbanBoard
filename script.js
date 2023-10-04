@@ -8,7 +8,7 @@ const mainCont = document.querySelector('main');
 
 //Variable
 const uid = new ShortUniqueId({ length: 5 });
-
+const colorsArray = ["red", "blue", "green", "purple"];
 
 //add event listener to add-btn container
 addBtnContainer.addEventListener('click',function(){
@@ -73,8 +73,10 @@ textAreaCont.addEventListener('keypress',function (e){
 
     const lockButton = ticketContainer.querySelector('.lock-icon');
     const textArea =  ticketContainer.querySelector('.ticket-area');
+    const ticketColorElem = ticketContainer.querySelector('.ticket-color');
 
      handleLockBtn(lockButton,textArea);
+     handleChangeColor(ticketColorElem);
 
  }
 
@@ -93,6 +95,10 @@ textAreaCont.addEventListener('keypress',function (e){
             textArea.contentEditable = false;
         }
     })
+
+ }
+
+ function handleChangeColor(ticketColorElem){
 
  }
 
