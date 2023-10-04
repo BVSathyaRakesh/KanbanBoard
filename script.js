@@ -57,6 +57,32 @@ textAreaCont.addEventListener('keypress',function (e){
     
 })
 
+for (let i = 0; i < priorityColorsArr.length; i++) {
+    let currentColorElem = priorityColorsArr[i];
+    currentColorElem.addEventListener("dblclick", function () {
+        console.log("dblclick");
+        for (let i = 0; i < priorityColorsArr.length; i++) {
+            // console.log(colorModalArr[i].classList);
+            priorityColorsArr[i].classList.remove("selected");
+        }
+        /********************ui********************/
+
+        showAllTickets();
+    })
+}
+
+function showAllTickets() {
+    // 1. select all the latest tickets
+    const ticketsArr = mainCont.querySelectorAll(".ticket-cont");
+    //  loop through all the tickets
+    for (let i = 0; i < ticketsArr.length; i++) {
+        const cTicket = ticketsArr[i];
+        cTicket.style.display = "block";
+        // only make the ticket visible when the ticket color ==currentColor
+    }
+}
+
+
 /**************filtering logic on the tickets**********/
 for (let i = 0; i < priorityColorsArr.length; i++) {
     let currentColorElem = priorityColorsArr[i];
