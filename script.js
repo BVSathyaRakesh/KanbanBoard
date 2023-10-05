@@ -1,4 +1,3 @@
-
 //select
 const  modalContainer = document.querySelector('.modal-cont');
 const addBtnContainer = document.querySelector('.add-btn');
@@ -8,12 +7,12 @@ const mainCont = document.querySelector('main');
 const priorityColorsArr = document.querySelectorAll(".toolbox-priority-cont .color");
 
 const deleteBtn = document.querySelector('.remove-btn');
-let deleteIcon = document.querySelector('.fa-trash');
+
 
 //Variable
 const uid = new ShortUniqueId({ length: 5 });
 const colorsArray = ["red", "blue", "green", "purple"];
-
+let deleteFlag = false;
 
 
 
@@ -94,7 +93,6 @@ textAreaCont.addEventListener('keypress',function (e){
         //current Color
         const currentColor = modalContainer.querySelector('.selected');
         const taskColor = currentColor.getAttribute('currColor');
-      
 
         //reset your model to default
         textAreaCont.value = "";
@@ -105,7 +103,49 @@ textAreaCont.addEventListener('keypress',function (e){
 })
 
 
-function handleLockBtn(lockButton,textArea){
+
+
+ deleteBtn.addEventListener('click',function(){
+     
+     if(deleteFlag == false){
+        deleteBtn.style.color = 'red';
+        deleteFlag = true;
+     }
+     else {
+        deleteBtn.style.color = 'black';
+        deleteFlag = false;
+     }
+ })
+
+
+/**************Helper Functions**********/
+
+function createTicket(taskColor,task){
+
+    const id = uid.rnd();
+    
+    const ticketContainer = document.createElement('div');
+    ticketContainer.setAttribute('class','ticket-cont');
+
+    ticketContainer.innerHTML = `<div class="ticket-color ${taskColor}"></div>
+    <div class="ticket-id">#${id}</div>
+    <div class="ticket-area">${task}</div>
+    <i class="fa-solid fa-lock lock-icon"></i>` 
+
+    mainCont.appendChild(ticketContainer);
+
+    const lockButton = ticketContainer.querySelector('.lock-icon');
+    const textArea =  ticketContainer.querySelector('.ticket-area');
+    const ticketColorElem = ticketContainer.querySelector('.ticket-color');
+
+     handleLockBtn(lockButton,textArea);
+     handleChangeColor(ticketColorElem);
+
+     handleDelete(ticketContainer,id);
+
+ }
+
+ function handleLockBtn(lockButton,textArea){
 
     lockButton.addEventListener('click',function(){
         const isLocked =  lockButton.classList.contains('fa-lock');
@@ -138,37 +178,23 @@ function handleLockBtn(lockButton,textArea){
     })
  }
 
-
-/**************Helper Functions**********/
-
-function createTicket(taskColor,task){
-
-    const id = uid.rnd();
-    
-    const ticketContainer = document.createElement('div');
-    ticketContainer.setAttribute('class','ticket-cont');
-
-    ticketContainer.innerHTML = `<div class="ticket-color ${taskColor}"></div>
-    <div class="ticket-id">#${id}</div>
-    <div class="ticket-area">${task}</div>
-    <i class="fa-solid fa-lock lock-icon"></i>` 
-
-    mainCont.appendChild(ticketContainer);
-
-    const lockButton = ticketContainer.querySelector('.lock-icon');
-    const textArea =  ticketContainer.querySelector('.ticket-area');
-    const ticketColorElem = ticketContainer.querySelector('.ticket-color');
-
-     handleLockBtn(lockButton,textArea);
-     handleChangeColor(ticketColorElem);
-
+ function handleDelete(ticketContainer,id){
+      
+    ticketContainer.addEventListener('click',function(){
+        if(deleteFlag == true){
+            let res = confirm("do you want to delete it");
+            if (res) {
+                ticketContainer.remove();
+            }
+        }
+    })
+     
  }
 
  function filterTickets(currentColor) {
     console.log("element to be visible will be of color ", currentColor);
     // 1. select all the latest tickets
     const ticketsArr = mainCont.querySelectorAll(".ticket-cont");
-
     //  loop through all the tickets
     for (let i = 0; i < ticketsArr.length; i++) {
         const cTicket = ticketsArr[i];
@@ -193,11 +219,4 @@ function showAllTickets() {
         // only make the ticket visible when the ticket color ==currentColor
     }
 }
-
-
-
-
-
- 
-
 
