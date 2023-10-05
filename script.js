@@ -7,14 +7,14 @@ const textAreaCont = document.querySelector('.textarea-cont');
 const mainCont = document.querySelector('main');
 const priorityColorsArr = document.querySelectorAll(".toolbox-priority-cont .color");
 
+const deleteBtn = document.querySelector('.remove-btn');
+let deleteIcon = document.querySelector('.fa-trash');
+
 //Variable
 const uid = new ShortUniqueId({ length: 5 });
 const colorsArray = ["red", "blue", "green", "purple"];
 
-//add event listener to add-btn container
-addBtnContainer.addEventListener('click',function(){
-  modalContainer.style.display = 'flex';
-})
+
 
 
 // select all the color box
@@ -34,29 +34,6 @@ for(let i=0;i< colorModalArr.length;i++){
     })
 }
 
-
-textAreaCont.addEventListener('keypress',function (e){
-
-    if(e.key == 'Enter' && e.shiftKey == true){
-        modalContainer.style.display = 'none';
-
-        //create the Ticket
-
-        //text
-        const task = textAreaCont.value;
-        //current Color
-        const currentColor = modalContainer.querySelector('.selected');
-        const taskColor = currentColor.getAttribute('currColor');
-      
-
-        //reset your model to default
-        textAreaCont.value = "";
-
-        createTicket(taskColor,task);
-    }
-    
-})
-
 for (let i = 0; i < priorityColorsArr.length; i++) {
     let currentColorElem = priorityColorsArr[i];
     currentColorElem.addEventListener("dblclick", function () {
@@ -70,18 +47,6 @@ for (let i = 0; i < priorityColorsArr.length; i++) {
         showAllTickets();
     })
 }
-
-function showAllTickets() {
-    // 1. select all the latest tickets
-    const ticketsArr = mainCont.querySelectorAll(".ticket-cont");
-    //  loop through all the tickets
-    for (let i = 0; i < ticketsArr.length; i++) {
-        const cTicket = ticketsArr[i];
-        cTicket.style.display = "block";
-        // only make the ticket visible when the ticket color ==currentColor
-    }
-}
-
 
 /**************filtering logic on the tickets**********/
 for (let i = 0; i < priorityColorsArr.length; i++) {
@@ -107,50 +72,40 @@ for (let i = 0; i < priorityColorsArr.length; i++) {
     })
 }
 
-function filterTickets(currentColor) {
-    console.log("element to be visible will be of color ", currentColor);
-    // 1. select all the latest tickets
-    const ticketsArr = mainCont.querySelectorAll(".ticket-cont");
 
-    //  loop through all the tickets
-    for (let i = 0; i < ticketsArr.length; i++) {
-        const cTicket = ticketsArr[i];
-        console.log(cTicket);
-        let isPresent = cTicket.querySelector(`.${currentColor}`);
-        if (isPresent == null) {
-            cTicket.style.display = "none";
-        } else {
-            cTicket.style.display = "block";
-        }
-        // only make the ticket visible when the ticket color ==currentColor
+//  Main App handler Functions
+
+//add event listener to add-btn container
+addBtnContainer.addEventListener('click',function(){
+    modalContainer.style.display = 'flex';
+  })
+  
+  
+
+textAreaCont.addEventListener('keypress',function (e){
+
+    if(e.key == 'Enter' && e.shiftKey == true){
+        modalContainer.style.display = 'none';
+
+        //create the Ticket
+
+        //text
+        const task = textAreaCont.value;
+        //current Color
+        const currentColor = modalContainer.querySelector('.selected');
+        const taskColor = currentColor.getAttribute('currColor');
+      
+
+        //reset your model to default
+        textAreaCont.value = "";
+
+        createTicket(taskColor,task);
     }
-}
-
-
- function createTicket(taskColor,task){
-
-    const id = uid.rnd();
     
-    const ticketContainer = document.createElement('div');
-    ticketContainer.setAttribute('class','ticket-cont');
+})
 
-    ticketContainer.innerHTML = `<div class="ticket-color ${taskColor}"></div>
-    <div class="ticket-id">#${id}</div>
-    <div class="ticket-area">${task}</div>
-    <i class="fa-solid fa-lock lock-icon"></i>` 
 
-    mainCont.appendChild(ticketContainer);
-
-    const lockButton = ticketContainer.querySelector('.lock-icon');
-    const textArea =  ticketContainer.querySelector('.ticket-area');
-    const ticketColorElem = ticketContainer.querySelector('.ticket-color');
-
-     handleLockBtn(lockButton,textArea);
-     handleChangeColor(ticketColorElem);
-
- }
-
- function handleLockBtn(lockButton,textArea){
+function handleLockBtn(lockButton,textArea){
 
     lockButton.addEventListener('click',function(){
         const isLocked =  lockButton.classList.contains('fa-lock');
@@ -182,4 +137,67 @@ function filterTickets(currentColor) {
         ticketColorElem.classList.add(nextColor);
     })
  }
+
+
+/**************Helper Functions**********/
+
+function createTicket(taskColor,task){
+
+    const id = uid.rnd();
+    
+    const ticketContainer = document.createElement('div');
+    ticketContainer.setAttribute('class','ticket-cont');
+
+    ticketContainer.innerHTML = `<div class="ticket-color ${taskColor}"></div>
+    <div class="ticket-id">#${id}</div>
+    <div class="ticket-area">${task}</div>
+    <i class="fa-solid fa-lock lock-icon"></i>` 
+
+    mainCont.appendChild(ticketContainer);
+
+    const lockButton = ticketContainer.querySelector('.lock-icon');
+    const textArea =  ticketContainer.querySelector('.ticket-area');
+    const ticketColorElem = ticketContainer.querySelector('.ticket-color');
+
+     handleLockBtn(lockButton,textArea);
+     handleChangeColor(ticketColorElem);
+
+ }
+
+ function filterTickets(currentColor) {
+    console.log("element to be visible will be of color ", currentColor);
+    // 1. select all the latest tickets
+    const ticketsArr = mainCont.querySelectorAll(".ticket-cont");
+
+    //  loop through all the tickets
+    for (let i = 0; i < ticketsArr.length; i++) {
+        const cTicket = ticketsArr[i];
+        console.log(cTicket);
+        let isPresent = cTicket.querySelector(`.${currentColor}`);
+        if (isPresent == null) {
+            cTicket.style.display = "none";
+        } else {
+            cTicket.style.display = "block";
+        }
+        // only make the ticket visible when the ticket color ==currentColor
+    }
+}
+
+function showAllTickets() {
+    // 1. select all the latest tickets
+    const ticketsArr = mainCont.querySelectorAll(".ticket-cont");
+    //  loop through all the tickets
+    for (let i = 0; i < ticketsArr.length; i++) {
+        const cTicket = ticketsArr[i];
+        cTicket.style.display = "block";
+        // only make the ticket visible when the ticket color ==currentColor
+    }
+}
+
+
+
+
+
+ 
+
 
