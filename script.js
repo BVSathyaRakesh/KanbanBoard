@@ -14,6 +14,24 @@ const uid = new ShortUniqueId({ length: 5 });
 const colorsArray = ["red", "blue", "green", "purple"];
 let deleteFlag = false;
 
+let ticketsArray =[];
+
+if (localStorage.getItem('ticketsArray') != null) {
+    let strTicketsArray = localStorage.getItem('ticketsArray');
+    ticketsArray = JSON.parse(strTicketsArray);
+
+    //with the help of that object create a ticket
+    for (let i = 0; i < ticketsArray.length; i++) {
+        let ticketObj = ticketsArray[i];
+        createTicket(
+            ticketObj.color,
+            ticketObj.task,
+            ticketObj.id,
+            true);
+    }
+}
+
+
 
 
 // select all the color box
@@ -120,9 +138,14 @@ textAreaCont.addEventListener('keypress',function (e){
 
 /**************Helper Functions**********/
 
-function createTicket(taskColor,task){
+function createTicket(taskColor, task, pId, flag){
 
-    const id = uid.rnd();
+    let id;
+    if (flag == true) {
+        id = pId;
+    } else {
+        id = uid.rnd();
+    }
     
     const ticketContainer = document.createElement('div');
     ticketContainer.setAttribute('class','ticket-cont');
@@ -137,6 +160,18 @@ function createTicket(taskColor,task){
     const lockButton = ticketContainer.querySelector('.lock-icon');
     const textArea =  ticketContainer.querySelector('.ticket-area');
     const ticketColorElem = ticketContainer.querySelector('.ticket-color');
+
+
+    if (flag == undefined) {
+        let ticketObj = {
+            id: id,
+            task: task,
+            color: taskColor
+        }
+
+        ticketsArr.push(ticketObj);
+        setLocalStorage();
+    }
 
      handleLockBtn(lockButton,textArea);
      handleChangeColor(ticketColorElem);
@@ -159,6 +194,18 @@ function createTicket(taskColor,task){
             lockButton.classList.remove('fa-lock-open');
             textArea.contentEditable = false;
         }
+
+         /*************************local storage***********************/
+         for (let i = 0; i < ticketsArr.length; i++) {
+            let ticketObj = ticketsArr[i];
+            if (ticketObj.id == id) {
+                // overriding 
+                let newTask = ticketArea.innerText;
+                ticketObj.task = newTask;
+                break;
+            }
+        }
+        setLocalStorage();
     })
 
  }
@@ -175,6 +222,17 @@ function createTicket(taskColor,task){
         let nextColor = colorsArray[nidx];
         ticketColorElem.classList.remove(cColor);
         ticketColorElem.classList.add(nextColor);
+
+/*************************local storage***********************/
+        for (let i = 0; i < ticketsArray.length; i++) {
+            let ticketObj = ticketsArray[i];
+            if (ticketObj.id == id) {
+                ticketObj.color = nextColor;
+                break;
+            }
+        }
+        setLocalStorage();
+
     })
  }
 
@@ -185,6 +243,16 @@ function createTicket(taskColor,task){
             let res = confirm("do you want to delete it");
             if (res) {
                 ticketContainer.remove();
+/*************************local storage***********************/
+                let ridx;
+                for (let i = 0; i < ticketsArray.length; i++) {
+                    let ticketObj = ticketsArray[i];
+                    if (ticketObj.id == id) {
+                        ridx = i;
+                    }
+                }
+                ticketsArray.splice(ridx, 1);
+                setLocalStorage();
             }
         }
     })
@@ -220,3 +288,8 @@ function showAllTickets() {
     }
 }
 
+
+function setLocalStorage() {
+    const strTicketsArr = JSON.stringify(ticketsArr);
+    localStorage.setItem("ticketsArr", strTicketsArr);
+}
